@@ -6,8 +6,10 @@ Lead Developers:
   # RHEED 
   1. Sumner Harris 
   2. Rama Vasudevan 
-  3. Debangshu Mukherjee 
-  4. P. Ganesh
+  3. Debangshu Mukherjee
+  4. Simon Kim
+  5. Soumendu Bagchi
+  6. P. Ganesh
 
   # CBED 
   1. Debangshu Mukherjee 
