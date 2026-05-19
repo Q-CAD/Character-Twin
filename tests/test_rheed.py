@@ -1,7 +1,6 @@
 """Tests for character_twin.rheed package."""
 
 import math
-from pathlib import Path
 
 import numpy as np
 import pytest
@@ -12,16 +11,10 @@ from character_twin.rheed.crystal import (
     load_structure_from_cif,
     reciprocal_lattice_from_real,
     frac_to_cart,
-    cart_from_intvec,
 )
 from character_twin.rheed.geometry import (
     rot_about_axis,
     detector_grid,
-    q_from_screen,
-    build_surface_motif,
-    build_rod_list,
-    build_reflections_3d,
-    reflections_to_detector_nodes,
 )
 from character_twin.rheed.rendering import (
     specular_center_mm,
@@ -29,10 +22,6 @@ from character_twin.rheed.rendering import (
     apply_shadow_mask,
 )
 from character_twin.rheed.models import (
-    Broadening2D,
-    Broadening3D,
-    BroadeningSpecular,
-    ScreenBlur,
     ShadowMask,
     KikuchiParams,
 )

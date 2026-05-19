@@ -72,6 +72,9 @@ def render_3d_island_qspace(
     params: Broadening3D,
 ) -> np.ndarray:
     """3D island scattering from broadened reciprocal-lattice peaks in q-space."""
+    if not refls3d:
+        return np.zeros(q.shape[:2], dtype=float)
+
     R_az = rot_about_axis(n, azimuth_deg)
 
     q1 = q[..., 0] * e1[0] + q[..., 1] * e1[1] + q[..., 2] * e1[2]
@@ -296,8 +299,13 @@ def apply_screen_broadening(
     params: ScreenBlur,
 ) -> np.ndarray:
     """Apply final Gaussian blur to simulated RHEED image."""
+    if len(xd) < 2 or len(yd) < 2:
+        return Iimg
+
     dx = float(xd[1] - xd[0])
     dy = float(yd[1] - yd[0])
+    if abs(dx) < 1e-12 or abs(dy) < 1e-12:
+        return Iimg
 
     sigma_x_px = params.sigma_x_mm / dx
     sigma_y_px = params.sigma_y_mm / dy

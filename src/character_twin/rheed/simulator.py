@@ -39,9 +39,9 @@ class RHEEDConfig:
     """Full configuration for a RHEED simulation run."""
 
     title: str
-    lattice: np.ndarray
-    frac: np.ndarray
-    weights: np.ndarray
+    lattice: np.ndarray | None = None
+    frac: np.ndarray | None = None
+    weights: np.ndarray | None = None
     cif_path: str | None = None
 
     E_keV: float = 20.0
@@ -71,6 +71,11 @@ class RHEEDConfig:
     ewald_tol: float = 0.09
     ewald_sigma: float = 0.04
     qperp_center_mode: str = "reflected"
+
+    @classmethod
+    def from_cif(cls, title: str, cif_path: str, **kwargs: object) -> "RHEEDConfig":
+        """Build config sourced from a CIF file without placeholder lattice arrays."""
+        return cls(title=title, cif_path=cif_path, **kwargs)
 
 
 def simulate_rheed(cfg: RHEEDConfig) -> Dict[str, np.ndarray]:
@@ -119,8 +124,6 @@ def simulate_rheed(cfg: RHEEDConfig) -> Dict[str, np.ndarray]:
 
     nodes = reflections_to_detector_nodes(
         refls3d,
-        motif.e1,
-        motif.e2,
         motif.n,
         cfg.E_keV,
         cfg.theta_deg,

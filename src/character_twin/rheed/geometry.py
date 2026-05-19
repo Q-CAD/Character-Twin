@@ -213,8 +213,6 @@ def build_reflections_3d(
 
 def reflections_to_detector_nodes(
     refls3d: List[Reflection3D],
-    e1: np.ndarray,
-    e2: np.ndarray,
     n: np.ndarray,
     E_keV: float,
     theta_deg: float,
